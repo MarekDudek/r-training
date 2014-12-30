@@ -10,6 +10,7 @@ logical.true  <- T != F
 
 ## Strings
 string <- "strings in double quotes"
+string <- 'string in single quotes'
 string <- 123
 string <- "value of variable can be reassigned, even to different type"
 
