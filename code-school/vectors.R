@@ -68,3 +68,58 @@ sentence <- c('quick', 'brown', 'fox', 'jumped', 'over', 'the', 'lazy', 'dog')
 nouns <- sentence[c(3, 8)]
 
 assert(nouns == c('fox', 'dog'))
+
+## Vector names
+ranks <- 1:3
+names(ranks) <-c('first', 'second', 'third')
+
+assert(ranks["first"] == 1)
+
+ranks['second'] <- 4
+
+assert(ranks["second"] == 4)
+
+## Plotting one vector
+vesselsSunk <- c(4, 5, 1)
+barplot(vesselsSunk)
+
+names(vesselsSunk) <- c("England", "France", "Norway")
+barplot(vesselsSunk)
+
+## Vector math
+a <- c(1, 2, 3)
+a <- a + 1
+
+assert(a[1] == 2)
+
+a <- a + a
+
+assert(a[1] == 4)
+
+a <- c(1, 3, 5)
+b <- c(2, 3, 4)
+comparison <- a < b
+
+assert(comparison[3] == FALSE)
+
+a <- seq(0, 2, 0.5)
+a <- pi * a
+sines <- sin(a)
+
+## Scatter plots
+x <- seq(1, 20, 0.1)
+y <- sin(x)
+plot(x, y)
+
+y <- abs(y)
+plot(x, y)
+
+## NA values
+vector <- c(1, 3, NA)
+s <- sum(vector)
+
+assert(is.na(s))
+
+s <- sum(vector, na.rm = TRUE)
+
+assert(!is.na(s))
