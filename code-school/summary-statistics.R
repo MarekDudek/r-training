@@ -28,12 +28,13 @@ abline(h=median, col="blue")
 ## Standard deviation
 
 pounds <- c(45000, 50000, 35000, 40000, 35000, 45000, 10000, 15000)
-
 barplot(pounds)
-abline(h=mean(pounds),   col="blue")
-abline(h=median(pounds), col="green")
+
+mean <- mean(pounds)
+abline(h=mean,   col="blue")
 
 deviation <- sd(pounds)
+abline(h=mean + deviation, col="red")
+abline(h=mean - deviation, col="red")
 
-abline(h=meanValue + deviation, col="red")
-abline(h=meanValue - deviation, col="red")
+abline(h=median(pounds), col="green")
