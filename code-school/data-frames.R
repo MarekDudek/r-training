@@ -22,3 +22,11 @@ vector.by.field   <- treasure$prices
 
 assert(vector.by.number == vector.by.name)
 assert(vector.by.number == vector.by.field)
+
+# Loading data frames
+
+list.files("code-school/data")
+
+targets <-read.csv("code-school/data/targets.csv")
+
+infantry <- read.table("code-school/data/infantry.txt", sep='\t', header=TRUE)
