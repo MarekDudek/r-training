@@ -35,3 +35,22 @@ b <- matrix(seq(1:15), 5, 3)
 
 second.and.fourth.row  <- b[c(2,4), ]
 first.and.third.column <- b[ ,c(1,3)]
+
+
+## Plotting matrices
+
+elevation <- matrix(1, 10, 10)
+elevation[4, 6] <- 0
+
+contour(elevation)
+
+persp(elevation)
+persp(elevation, expand=0.3)
+
+image(elevation)
+
+# sample data set
+
+contour(volcano)
+persp(volcano, expand=0.1)
+image(volcano)
