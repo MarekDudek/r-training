@@ -38,3 +38,4 @@ abline(h=mean + deviation, col="red")
 abline(h=mean - deviation, col="red")
 
 abline(h=median(pounds), col="green")
+
