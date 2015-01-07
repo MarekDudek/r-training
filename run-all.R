@@ -7,3 +7,5 @@ source("code-school/summary-statistics.R")
 source("code-school/factors.R")
 source("code-school/data-frames.R")
 source("code-school/real-world-data.R")
+
+source("coursera/data-types.R")
