@@ -24,5 +24,3 @@ source(file.name)
 conn <- file(file.name)
 str(file)
 close(conn)
-
-even(3)
