@@ -9,3 +9,8 @@ source("code-school/data-frames.R")
 source("code-school/real-world-data.R")
 
 source("coursera/data-types.R")
+source("coursera/reading-tabular-data.R")
+
+source("coursera/week-1-quiz.R")
+
+source("coursera/control-structures.R")
