@@ -9,16 +9,20 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
         stop(paste('Wrong pollutant: "', pollutant, '"', sep=''))
     }
     
-    file.name = '023.csv'
-    file.path = paste0(directory, '/', file.name)
-    file.data.frame <- read.csv(file.path)
+    file.names = sprintf("%03d.csv", id)
+    file.paths = file.path(directory, file.names)
     
-    pollutant.vector <- file.data.frame[[pollutant]]
-    
-    available.values <- pollutant.vector[!is.na(pollutant.vector)]
-    mean <- mean(available.values)
-    
-    mean
+    for (file.path in file.paths) {
+        data.frame <- read.csv(file.path)
+        
+        pollutant.vector <- data.frame[[pollutant]]
+        available.values <- pollutant.vector[!is.na(pollutant.vector)]
+        
+        mean <- mean(available.values)
+        return(mean)
+    }
 }
 
 pm3 <- pollutantmean("specdata", "nitrate", 23)
+pm2 <- pollutantmean("specdata", "nitrate", 70:72)
+
