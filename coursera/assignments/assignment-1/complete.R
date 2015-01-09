@@ -1,18 +1,25 @@
 
 complete <- function(directory, id = 1:332) {
     
-    ## 'directory' is a character vector of length 1 indicating
-    ## the location of the CSV files
+    ids  <- c()
+    nobs <- c()
     
-    ## 'id' is an integer vector indicating the monitor ID numbers
-    ## to be used
-    
-    ## Return a data frame of the form:
-    ## id nobs
-    ## 1  117
-    ## 2  1041
-    ## ...
-    ## where 'id' is the monitor ID number and 'nobs' is the
-    ## number of complete cases
-}
+    for (i in id) {
 
+        name <- sprintf('%03d.csv', i)
+        path <- file.path(directory, name)
+        
+        frame <- read.csv(path)
+        
+        nitrate <- frame$nitrate
+        sulfate <- frame$sulfate
+        
+        complete       <- complete.cases(nitrate, sulfate)
+        complete.count <- length(complete[complete])
+        
+        ids  <- c(ids, i)
+        nobs <- c(nobs, complete.count)
+    }
+    
+    data.frame(id=ids, nobs=nobs)
+}
