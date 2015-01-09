@@ -33,3 +33,24 @@ assert( c3 == data.frame(id=c(30, 29, 28, 27, 26, 25), nobs=c(932, 711, 475, 338
 
 c4 <- complete("specdata", 3)
 assert( c4 == data.frame(id=c(3), nobs=c(243)) )
+
+
+# Part 3
+
+source("corr.R")
+
+cr1 <- corr("specdata", 150)
+print(head(cr1))
+print(summary(cr1))
+
+cr2 <- corr("specdata", 400)
+print(head(cr2))
+print(summary(cr2))
+
+cr3 <- corr("specdata", 5000)
+print(head(cr3))
+print(summary(cr3))
+
+cr4 <- corr("specdata")
+print(head(cr4))
+print(summary(cr4))
