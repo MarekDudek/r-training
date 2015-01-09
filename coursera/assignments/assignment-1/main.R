@@ -40,17 +40,13 @@ assert( c4 == data.frame(id=c(3), nobs=c(243)) )
 source("corr.R")
 
 cr1 <- corr("specdata", 150)
-print(head(cr1))
-print(summary(cr1))
+assert( round(head(cr1), 5) == c(-0.01896, -0.14051, -0.04390, -0.06816, -0.12351, -0.07589) )
 
 cr2 <- corr("specdata", 400)
-print(head(cr2))
-print(summary(cr2))
+assert( round(head(cr2), 5) == c(-0.01896, -0.04390, -0.06816, -0.07589,  0.76313, -0.15783) )
 
 cr3 <- corr("specdata", 5000)
-print(head(cr3))
-print(summary(cr3))
+assert( length(cr3) == 0 )
 
 cr4 <- corr("specdata")
-print(head(cr4))
-print(summary(cr4))
+assert( length(cr4) == 323 )
