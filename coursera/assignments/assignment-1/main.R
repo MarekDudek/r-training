@@ -61,6 +61,13 @@ assert( summary2['Max.']    ==  0.76310 )
 
 cr3 <- corr("specdata", 5000)
 assert( length(cr3) == 0 )
+summary3 <- summary(cr3)
+assert( is.na(summary3['Min.']))
+assert( is.na(summary3['1st Qu.']))
+assert( is.na(summary3['Median']))
+assert( is.na(summary3['Mean']))
+assert( is.na(summary3['3rd Qu.']))
+assert( is.na(summary3['Max.']))
 
 cr4 <- corr("specdata")
 assert( length(cr4) == 323 )
