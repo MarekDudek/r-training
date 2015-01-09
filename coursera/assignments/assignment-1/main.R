@@ -41,6 +41,8 @@ source("corr.R")
 
 cr1 <- corr("specdata", 150)
 assert( round(head(cr1), 5) == c(-0.01896, -0.14051, -0.04390, -0.06816, -0.12351, -0.07589) )
+summary1 <- summary(cr1)
+assert( summary1['Min.'] == -0.2106 )
 
 cr2 <- corr("specdata", 400)
 assert( round(head(cr2), 5) == c(-0.01896, -0.04390, -0.06816, -0.07589,  0.76313, -0.15783) )
