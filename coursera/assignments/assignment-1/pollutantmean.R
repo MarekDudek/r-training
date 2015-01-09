@@ -4,16 +4,21 @@ print. <- function(..., quote=FALSE) {
 }
 
 pollutantmean <- function(directory, pollutant, id = 1:332) {
-    ## 'directory' is a character vector of length 1 indicating
-    ## the location of the CSV files
     
-    ## 'pollutant' is a character vector of length 1 indicating
-    ## the name of the pollutant for which we will calculate the
-    ## mean; either "sulfate" or "nitrate".
+    if (!pollutant %in% c('sulfate', 'nitrate')) {
+        stop(paste('Wrong pollutant: "', pollutant, '"', sep=''))
+    }
     
-    ## 'id' is an integer vector indicating the monitor ID numbers
-    ## to be used
+    file.name = '023.csv'
+    file.path = paste0(directory, '/', file.name)
+    file.data.frame <- read.csv(file.path)
     
-    ## Return the mean of the pollutant across all monitors list
-    ## in the 'id' vector (ignoring NA values)
+    pollutant.vector <- file.data.frame[[pollutant]]
+    
+    available.values <- pollutant.vector[!is.na(pollutant.vector)]
+    mean <- mean(available.values)
+    
+    mean
 }
+
+pm3 <- pollutantmean("specdata", "nitrate", 23)
