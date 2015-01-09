@@ -1,8 +1,9 @@
 
 corr <- function(directory, threshold = 0) {
 
-    ids <- 1:332
     correlations <- c()
+    
+    ids <- 1:332
     
     for (id in ids) {
         
