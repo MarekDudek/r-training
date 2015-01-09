@@ -1,28 +1,25 @@
 
-print. <- function(..., quote=FALSE) {
-    print(paste(...), quote=quote)    
-}
-
 pollutantmean <- function(directory, pollutant, id = 1:332) {
     
     if (!pollutant %in% c('sulfate', 'nitrate')) {
-        stop(paste('Wrong pollutant: "', pollutant, '"', sep=''))
+        stop(paste0('Wrong pollutant: "', pollutant, '"'))
     }
     
-    file.names = sprintf("%03d.csv", id)
-    file.paths = file.path(directory, file.names)
+    names <- sprintf('%03d.csv', id)
+    paths <- file.path(directory, names)
     
-    for (file.path in file.paths) {
-        data.frame <- read.csv(file.path)
+    all.values <- c()
+    
+    for (path in paths) {
         
-        pollutant.vector <- data.frame[[pollutant]]
-        available.values <- pollutant.vector[!is.na(pollutant.vector)]
+        frame <- read.csv(path)
         
-        mean <- mean(available.values)
-        return(mean)
+        vector <- frame[[pollutant]]
+        available <- vector[!is.na(vector)]
+        
+        all.values <- c(all.values, available)
     }
+    
+    mean <- mean(all.values)
+    mean
 }
-
-pm3 <- pollutantmean("specdata", "nitrate", 23)
-pm2 <- pollutantmean("specdata", "nitrate", 70:72)
-
