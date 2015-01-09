@@ -8,18 +8,15 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
     names <- sprintf('%03d.csv', id)
     paths <- file.path(directory, names)
     
-    all.values <- c()
+    values <- c()
     
     for (path in paths) {
         
         frame <- read.csv(path)
-        
         vector <- frame[[pollutant]]
-        available <- vector[!is.na(vector)]
         
-        all.values <- c(all.values, available)
+        values <- c(values, vector)
     }
     
-    mean <- mean(all.values)
-    mean
+    mean(values, na.rm=TRUE)
 }
