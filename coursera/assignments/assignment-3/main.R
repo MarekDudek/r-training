@@ -10,12 +10,6 @@ column.names <- names(outcome)
 thirty.day.death.rates.from.heart.attack <- outcome[, 'Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack']
 #hist(as.numeric(thirty.day.death.rates.from.heart.attack))
 
-
-source('best.R')
-
-
-# There are three possible outcomes: 'heart attack', 'heart failure', or 'pneumonia'.
-
 error.message = function(result) {
     
     assert( class(result) == 'try-error' )
@@ -27,14 +21,33 @@ error.message = function(result) {
     message
 }
 
-best <- try( 
+# There are three possible outcomes: 'heart attack', 'heart failure', or 'pneumonia'.
+## Given
+source('best.R')
+
+## When
+hospital <- try( 
     {
-        best('New York', 'non existent outcome')
+        best('AL', 'non existent outcome')
     }
 )
 
-assert( error.message(best) == 'invalid outcome' )
+## Then
+assert( error.message(hospital) == 'invalid outcome' )
 
+# State should be valid
+## Given
+source('best.R')
+
+## When
+hospital <- try(
+    {
+        best('Alabama', 'pneumonia')
+    }
+)
+
+## Then
+assert( error.message(hospital) == 'invalid state' )
 
 
 
