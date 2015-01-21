@@ -12,18 +12,14 @@ names(column.names) <- c('heart attack', 'heart failure', 'pneumonia')
 rankhospital <- function(state, outcome, num = 'best') {
 
     data <- read.csv('outcome-of-care-measures.csv', colClasses = 'character')
-    
     data.in.state <- data[data$State == state, ]
     
     column <- column.names[[outcome]]
-    numbers <- suppressWarnings(as.numeric(data.in.state[, column]))
+    ordered <- data.in.state[order(as.numeric(data.in.state[, column]), data.in.state$Hospital.Name), ]
     
-    orders <- order(numbers)
-    sorted.data <- data.in.state[orders, ]
-    
-    hospital <- sorted.data[num, ]
-
+    hospital <- ordered[num, ]
     name <- hospital$Hospital.Name
+    
     name
 }
 
@@ -38,7 +34,7 @@ hospital <- rankhospital('TX', 'heart failure', 4)
 assert( hospital == 'DETAR HOSPITAL NAVARRO' )
 
 
-#numbers <- c(1, 10, 3, 8, 4, 3)
-#orders <- order(numbers)
-#sorted <- numbers[orders]
-
+#########################################################################################
+#########################################################################################
+#########################################################################################
+print('All tests passed', quote=F)
