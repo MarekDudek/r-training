@@ -22,11 +22,7 @@ error.message = function(result) {
 source('best.R')
 
 ## When
-hospital <- try( 
-    {
-        best('AL', 'non existent outcome')
-    }
-)
+hospital <- try(best('NY', 'hert attack'))
 
 ## Then
 assert( error.message(hospital) == 'invalid outcome' )
@@ -39,11 +35,7 @@ assert( error.message(hospital) == 'invalid outcome' )
 source('best.R')
 
 ## When
-hospital <- try(
-    {
-        best('Alabama', 'pneumonia')
-    }
-)
+hospital <- try(best('BB', 'heart attack'))
 
 ## Then
 assert( error.message(hospital) == 'invalid state' )
@@ -61,4 +53,47 @@ hospital <- best('TX', 'heart attack')
 ## Then
 assert( hospital == 'CYPRESS FAIRBANKS MEDICAL CENTER' )
 
+#########################################################################################
+## Best for heart failure in Texas
+#########################################################################################
+
+## Given
+source('best.R')
+
+## When
+hospital <- best('TX', 'heart failure')
+
+## Then
+assert( hospital == 'FORT DUNCAN MEDICAL CENTER' )
+
+#########################################################################################
+## Best for heart attack in Maryland
+#########################################################################################
+
+## Given
+source('best.R')
+
+## When
+hospital <- best('MD', 'heart attack')
+
+## Then
+assert( hospital == 'JOHNS HOPKINS HOSPITAL, THE' )
+
+#########################################################################################
+## Best for pneumonia in Maryland
+#########################################################################################
+
+## Given
+source('best.R')
+
+## When
+hospital <- best('MD', 'pneumonia')
+
+## Then
+assert( hospital == 'GREATER BALTIMORE MEDICAL CENTER' )
+
+
+#########################################################################################
+#########################################################################################
+#########################################################################################
 print('All tests passed', quote=F)
