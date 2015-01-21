@@ -13,6 +13,14 @@ rankhospital <- function(state, outcome, num = 'best') {
 
     data <- read.csv('outcome-of-care-measures.csv', colClasses = 'character')
     
+    if (! state %in% data$State) {
+        stop('invalid state')
+    }
+    
+    if (! outcome %in% names(column.names)) {
+        stop('invalid outcome')
+    }
+    
     data.in.state <- data[data$State == state, ]
     
     column <- column.names[[outcome]]
@@ -31,6 +39,18 @@ rankhospital <- function(state, outcome, num = 'best') {
     
     name <- hospital$Hospital.Name
     name
+}
+
+#########################################################################################
+error.message = function(result) {
+    
+    assert( class(result) == 'try-error' )
+    
+    attrs <- attributes(result)
+    condition <- attrs['condition']
+    message <- condition[[1]][[1]]
+    
+    message
 }
 
 #########################################################################################
@@ -72,6 +92,46 @@ hospital <- rankhospital('MD', 'heart attack', 5000)
 
 ## Then
 assert( is.na(hospital) )
+
+#########################################################################################
+## Submission case 4
+#########################################################################################
+
+## When
+hospital <- rankhospital("NC", "heart attack", "worst")
+
+## Then
+assert( hospital == 'WAYNE MEMORIAL HOSPITAL' )
+
+#########################################################################################
+## Submission case 5
+#########################################################################################
+
+## When
+hospital <- rankhospital("WA", "heart attack", 7)
+
+## Then
+assert( hospital == 'YAKIMA VALLEY MEMORIAL HOSPITAL' )
+
+#########################################################################################
+## Submission case 6
+#########################################################################################
+
+## When
+hospital <- rankhospital("WA", "pneumonia", 1000)
+
+## Then
+assert( is.na(hospital) )
+
+#########################################################################################
+## Submission case 7
+#########################################################################################
+
+## When
+hospital <- try(rankhospital("NY", "heart attak", 7))
+
+## Then
+assert( error.message(hospital) == 'invalid outcome' )
 
 #########################################################################################
 #########################################################################################
