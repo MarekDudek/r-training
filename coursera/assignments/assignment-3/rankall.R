@@ -88,8 +88,22 @@ hospitals.3.pneumonia <- c(
 )
 states.bottom.3 <- c('WI', 'WV', 'WY')
 
+hospitals.10.pneumonia <- c(
+    'WELLMONT HAWKINS COUNTY MEMORIAL HOSPITAL',
+    'FORT DUNCAN MEDICAL CENTER',
+    'VA SALT LAKE CITY HEALTHCARE - GEORGE E. WAHLEN VA MEDICAL CENTER',
+    'SENTARA POTOMAC HOSPITAL',
+    'GOV JUAN F LUIS HOSPITAL & MEDICAL CTR',
+    'SPRINGFIELD HOSPITAL',
+    'HARBORVIEW MEDICAL CENTER',
+    'AURORA ST LUKES MEDICAL CENTER',
+    'FAIRMONT GENERAL HOSPITAL',
+    'CHEYENNE VA MEDICAL CENTER'
+)
+states.bottom.10 <- c('TN', 'TX', 'UT', 'VA', 'VI', 'VT', 'WA', 'WI', 'WV', 'WY')
+
 #########################################################################################
-## Twentieths for heart failure
+## Twentieths for heart attack
 #########################################################################################
 
 ## When
@@ -109,6 +123,17 @@ hospitals <- rankall('pneumonia', 'worst')
 ## Then
 df <- data.frame(hospital=hospitals.3.pneumonia, state=states.bottom.3)
 assert( results.the.same(tail(hospitals, 3), df) )
+
+#########################################################################################
+## Best for heart failure
+#########################################################################################
+
+## When
+hospitals <- rankall('heart failure')
+
+## Then
+df <- data.frame(hospital=hospitals.10.pneumonia, state=states.bottom.10)
+assert( results.the.same(tail(hospitals, 10), df) )
 
 #########################################################################################
 #########################################################################################
