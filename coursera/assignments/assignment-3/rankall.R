@@ -2,7 +2,6 @@
 library(testit)
 
 setwd('/home/marek/Education/coursera/data-science/r-training/coursera/assignments/assignment-3')
-source('rankhospital.R')
 
 column.names <- c(
     'Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack', 
@@ -20,6 +19,8 @@ rankall <- function(outcome, num = "best") {
     data <- read.csv('outcome-of-care-measures.csv', colClasses = 'character')
     data.by.state <- split(data, data$State)
     
+    column <- column.names[[outcome]]
+    
     hospitals <- c()
     states    <- c()
     
@@ -27,13 +28,31 @@ rankall <- function(outcome, num = "best") {
         
         states    <- c(states, state)
         
-        hospital  <- rankhospital(state, outcome, num)
+        data.in.state <- data[data$State == state, ]
+        hospital  <- rankHospital(state, data.in.state, column, num)
         hospitals <- c(hospitals, hospital)
     }
     
     data.frame(hospital=hospitals, state=states)
 }
 
+rankHospital <- function(state, data.in.state, column, num = "best") {
+    
+    numbers <- suppressWarnings( as.numeric(data.in.state[, column]) )
+    ordered <- data.in.state[order(numbers, data.in.state$Hospital.Name), ]
+    
+    if (num == 'best') {
+        num <- 1
+    } else if (num == 'worst') {
+        available <- numbers[!is.na(numbers)]
+        num <- length(available)
+    }
+    
+    hospital <- ordered[num, ]
+    
+    name <- hospital$Hospital.Name
+    name
+}
 #########################################################################################
 results.the.same <- function(df1, df2) {
     
