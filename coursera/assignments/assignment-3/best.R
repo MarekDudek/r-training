@@ -8,14 +8,14 @@ names(column.names) <- c('heart attack', 'heart failure', 'pneumonia')
 
 best <- function(state, outcome) {
     
-    if (!outcome %in% names(column.names)) {
-        stop('invalid outcome')
-    }
-    
     data <- read.csv('outcome-of-care-measures.csv', colClasses = 'character')
     
     if (! state %in% data$State) {
         stop('invalid state')
+    }
+
+    if (! outcome %in% names(column.names)) {
+        stop('invalid outcome')
     }
     
     data.in.state <- data[data$State == state, ]
