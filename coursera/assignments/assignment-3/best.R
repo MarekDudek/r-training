@@ -19,16 +19,12 @@ best <- function(state, outcome) {
     }
     
     data.in.state <- data[data$State == state, ]
-    #print(paste('Hospital count in state:', nrow(data.in.state)), quote=F)
     
     column <- column.names[[outcome]]
-    #print(paste('Column:', column), quote=F)
-    
-    row.number <- which.min(data.in.state[, column])
-    #print(paste('Row number:', row.number), quote=F)
-    
-    hospital.with.lowest <- data.in.state[row.number, ]
-    #print(paste('Hospital with lowest stat:', hospital.with.lowest), quote=F)
-    
-    hospital.with.lowest$Hospital.Name
+    numbers <- suppressWarnings(as.numeric(data.in.state[, column]))
+
+    row.numbers <- which(numbers == min(numbers, na.rm=TRUE))
+    hospitals.with.lowest.stat <- data.in.state[row.numbers, ]
+
+    min(hospitals.with.lowest.stat$Hospital.Name, na.rm=TRUE)
 }
