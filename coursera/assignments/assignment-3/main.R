@@ -20,8 +20,9 @@ error.message = function(result) {
     
     message
 }
-
-# There are three possible outcomes: 'heart attack', 'heart failure', or 'pneumonia'.
+#########################################################################################
+## There are three possible outcomes: 'heart attack', 'heart failure', or 'pneumonia'.
+#########################################################################################
 ## Given
 source('best.R')
 
@@ -35,7 +36,10 @@ hospital <- try(
 ## Then
 assert( error.message(hospital) == 'invalid outcome' )
 
-# State should be valid
+#########################################################################################
+## State should be valid
+#########################################################################################
+
 ## Given
 source('best.R')
 
@@ -49,17 +53,16 @@ hospital <- try(
 ## Then
 assert( error.message(hospital) == 'invalid state' )
 
+#########################################################################################
+## ???
+#########################################################################################
+## Given
+source('best.R')
 
+## When
+hospital <- best('TX', 'heart attack')
 
-
-
-
-
-
-
-
-
-
-
+## Then
+assert( hospital == 'CYPRESS FAIRBANKS MEDICAL CENTER' )
 
 print('All tests passed', quote=F)
